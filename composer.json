@@ -54,7 +54,7 @@
 
         "sp/bower-bundle": "v0.10",
         
-        "tentwofour/cms-pages-bundle": "dev-master"
+        "ten24/cms-pages-bundle": "dev-master"
 
     },
     "require-dev": {
