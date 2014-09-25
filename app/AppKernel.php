@@ -54,7 +54,9 @@ class AppKernel extends Kernel
                 
                 new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             
-                new Sp\BowerBundle\SpBowerBundle()
+                new Sp\BowerBundle\SpBowerBundle(),
+                
+                new Ten24\GenericCMS\WebsiteBundle\Ten24GenericCMSWebsiteBundle()
                 
         );
         
