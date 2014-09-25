@@ -1,0 +1,4 @@
+ten24genericcmswebsitebundle_project:
+    resource: "@Ten24ThriveDesignWebsiteBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /
