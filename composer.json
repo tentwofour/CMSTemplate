@@ -1,5 +1,5 @@
 {
-    "name": "ten24/cms-starter",
+    "name": "ten24/cms-template",
     "license": "proprietary",
     "type": "project",
     "description": "A startup project to quickly initialize an instance of Kunstmaan Bundles Standard Edition + other packages required for front/backend development",
