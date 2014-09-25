@@ -20,10 +20,10 @@ parameters:
     multilanguage: false
     sentry.dsn:
     cdnpath:
-    websitetitle: 'FadaDance'
+    websitetitle: 'GenericCMSWebsite'
     searchport: 9200
-    searchindexname: fadadance
-    searchindexprefix: fadadance
+    searchindexname: genericcmswebsite
+    searchindexprefix: genericcmswebsite
     analytics.googletagmanager: 
     analytics.google:
     aviary_api_key:
