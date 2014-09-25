@@ -1,6 +1,6 @@
 {
     "name": "ten24/cms-starter",
-    "license": "MIT",
+    "license": "proprietary",
     "type": "project",
     "description": "A startup project to quickly initialize an instance of Kunstmaan Bundles Standard Edition + other packages required for front/backend development",
     "autoload": {
@@ -87,6 +87,7 @@
     "config": {
         "bin-dir": "bin"
     },
+    "minimum-stability": "stable",
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",   
