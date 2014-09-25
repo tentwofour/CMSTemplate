@@ -1,0 +1,16 @@
+/* ==========================================================================
+   Page Parts
+   ========================================================================== */
+
+.video-pp {
+    >div {
+        @extend .embed-responsive;
+        @extend .embed-responsive-16by9;
+    }
+}
+
+.image-pp {
+    >img {
+        @extend .img-responsive;
+    }
+}

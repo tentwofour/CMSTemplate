@@ -1,0 +1,26 @@
+{# recursive menu iterator #}
+{% for node in items %}
+    {% if startLevel is not defined %}
+        {% set startLevel = node.node.level %}
+    {% endif %}
+    
+    {% if not node.node.isHiddenFromNav() %}
+        <li class="{% if(node.active) %}active{% endif %}{{ node.children|length>0 ? ' dropdown' }}">
+            <a  href="{{ path('_slug', { 'url': node.slug }) }}"
+                title="{{ node.title }}"
+                {% if node.children|length>0 %} 
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                {% endif %}
+            >
+                {{ node.title }}
+                {{ (node.children|length>0) ? '<b class="caret"></b>' }}
+            </a>
+            {% if node.children|length>0 %}
+                <ul {% if (startLevel == 1 and node.node.level >= 1) or node.node.level >= 2 %}class="dropdown-menu"{% endif %}>
+                    {% include 'Ten24ThriveDesignWebsiteBundle:Layout:submenu.html.twig' with { items: node.children } %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endif %}
+{% endfor %}

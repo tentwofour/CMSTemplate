@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   Stylesheet for all browsers
+
+   Never add styles directly to this file - set up imports
+   Style guide: https://github.com/necolas/idiomatic-css
+   ========================================================================== */
+
+/* General config
+   ========================================================================== */
+@import "config/config";
+
+/* Vendors
+   ========================================================================== */
+@import "vendors/vendors";
+
+/* Website Theme
+   ========================================================================== */
+
+/* components */
+@import "components/components";

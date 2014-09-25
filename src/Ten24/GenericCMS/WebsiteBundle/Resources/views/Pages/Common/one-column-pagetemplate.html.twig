@@ -1,0 +1,16 @@
+{% if getpageparts(page, 'introduction') %}
+<div class="row">
+    <div class="col-sm-12">
+        {{ render_pageparts(page, 'introduction') }}
+    </div>
+</div>
+
+<div class="row-bordered"></div>
+
+{% endif %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {{ render_pageparts(page, 'main') }}
+    </div>
+</div>

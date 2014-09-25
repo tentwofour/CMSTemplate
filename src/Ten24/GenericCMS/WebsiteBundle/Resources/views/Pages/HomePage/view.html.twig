@@ -1,0 +1,9 @@
+{% extends 'Ten24ThriveDesignWebsiteBundle:Page:layout.html.twig' %}
+
+{% block extra_body_attributes %}
+class="home"
+{% endblock %}
+
+{% block content %}
+    {{ render_pagetemplate(page) }}
+{% endblock %}

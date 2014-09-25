@@ -52,7 +52,9 @@
         "knplabs/knp-menu-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.1.*@dev",
 
-        "sp/bower-bundle": "v0.10"
+        "sp/bower-bundle": "v0.10",
+        
+        "tentwofour/cms-pages-bundle": "@dev"
 
     },
     "require-dev": {

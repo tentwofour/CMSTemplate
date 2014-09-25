@@ -1,0 +1,8 @@
+parameters:
+
+services:
+    ten24thrivedesignwebsitebundle.admin_menu_adaptor:
+        class: Ten24\ThriveDesign\WebsiteBundle\Helper\Menu\AdminMenuAdaptor
+        arguments: ["@security.context"]
+        tags:
+            -  { name: 'kunstmaan_admin.menu.adaptor' }

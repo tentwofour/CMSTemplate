@@ -1,0 +1,183 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    esi:             { enabled: true }
+    translator:      { fallback: "%locale%" }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        assets_version: 1
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:         ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    globals:
+        websitetitle: %websitetitle%
+        defaultlocale: %defaultlocale%
+        requiredlocales: %requiredlocales%
+        titlebgcolor: '#000'
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    filters:
+        cssrewrite: ~
+        scss: ~
+        uglifyjs2:
+            bin: %kernel.root_dir%/Resources/node_modules/.bin/uglifyjs
+            compress: true
+        uglifycss:
+            bin: %kernel.root_dir%/Resources/node_modules/.bin/uglifycss
+        
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        entity_managers:
+            default:
+                auto_mapping: true
+                mappings:
+                    gedmo_translatable:
+                        type: annotation
+                        prefix: Gedmo\Translatable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                        alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    gedmo_translator:
+                        type: annotation
+                        prefix: Gedmo\Translator\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
+                        alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    gedmo_loggable:
+                        type: annotation
+                        prefix: Gedmo\Loggable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                        alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    gedmo_tree:
+                        type: annotation
+                        prefix: Gedmo\Tree\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                        alias: GedmoTree # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+
+parameters:
+    assetic.cache.class: Assetic\Cache\ArrayCache
+
+stof_doctrine_extensions:
+    default_locale: %defaultlocale%
+    translation_fallback: true
+    orm:
+        default:
+            loggable: true
+            translatable: true
+            sluggable: true
+            tree: true
+
+liip_imagine:
+    cache_prefix: uploads/cache
+    driver: gd
+    data_loader: filesystem
+    data_root: %kernel.root_dir%/../web
+    formats : ['jpg', 'jpeg','png', 'gif', 'bmp']
+    filter_sets:
+        optim:
+            quality: 85
+            format: jpg
+            filters:
+                strip: ~
+        optimjpg:
+            quality: 85
+            format: jpg
+            filters:
+                strip: ~
+        optimpng:
+            quality: 85
+            format: png
+            filters:
+                strip: ~
+        
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    kunstmaan_logging_introspection:
+        class: Monolog\Processor\IntrospectionProcessor
+        tags:
+            - { name: monolog.processor }
+
+    kunstmaan_logging_web:
+        class: Symfony\Bridge\Monolog\Processor\WebProcessor
+        tags:
+            - { name: monolog.processor }
+
+    kunstmaan_logging_formatter:
+        class: Monolog\Formatter\LineFormatter
+
+white_october_pagerfanta:
+    default_view: twitter_bootstrap3
+
+kunstmaan_translator:
+    enabled: false
+    managed_locales: ['en']
+
+kunstmaan_admin:
+    dashboard_route: 'kunstmaan_dashboard'
+                
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+    
+sp_bower:
+    install_on_warmup: true
+    keep_bowerrc: true
+    bin: %kernel.root_dir%/Resources/node_modules/bower/bin/bower
+    offline: false
+    allow_root: false
+    assetic:
+        enabled: false
+    bundles:
+        Ten24GenericCMSWebsiteBundle:
+            config_dir: %kernel.root_dir%/Resources
+            asset_dir: %kernel.root_dir%/../web/vendor
+            json_file: component.json
+            cache:
+                id: ~
+                directory: %kernel.root_dir%/../web/vendor/cache

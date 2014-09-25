@@ -1,0 +1,15 @@
+/* ==========================================================================
+   Paths
+
+   This file is exclusively intended for setting up variables
+   Never add styles directly to this file
+   ========================================================================== */
+
+
+// Bundles and Bower Vendor directory
+$root:                  "/bundles/ten24thrivedesignwebsite";
+$vendor:                "/vendor";
+
+
+// Font Awesome font path
+$fa-font-path:          "#{$vendor}/components-font-awesome/fonts";
