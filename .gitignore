@@ -15,7 +15,8 @@
 .idea
 web/generated-js
 web/generated-css
-web/uploads
+web/uploads/*
+!web/uploads/.gitkeep
 /backups
 /web/frontend/.temp
 /web/frontend/*.css
