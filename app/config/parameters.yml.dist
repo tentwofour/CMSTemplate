@@ -1,0 +1,33 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            en
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+# Kunstmaan
+    requiredlocales: en
+    defaultlocale: en
+    multilanguage: false
+    sentry.dsn:
+    cdnpath:
+    websitetitle: 'FadaDance'
+    searchport: 9200
+    searchindexname: fadadance
+    searchindexprefix: fadadance
+    analytics.googletagmanager: 
+    analytics.google:
+    aviary_api_key:
+    google.api.client_id:
+    google.api.client_secret:
+    google.api.dev_key:
+    
