@@ -6,6 +6,6 @@
         "jquery": "~1.11",
         "html5shiv": "~3.7",
         "svgeezy": "~1.0",
-        "components-font-awesome": "4.2.0",
+        "components-font-awesome": "4.2.0"
     }
 }
