@@ -1,7 +1,7 @@
-ten24_thrive_design_website:
-    resource: "@Ten24ThriveDesignWebsiteBundle/Resources/config/routing.yml"
+ten24_generic_cms_website:
+    resource: "@Ten24GenericCMSWebsiteBundle/Resources/config/routing.yml"
     prefix:   /
-
+    
 # KunstmaanMediaBundle
 _imagine:
     resource: .
