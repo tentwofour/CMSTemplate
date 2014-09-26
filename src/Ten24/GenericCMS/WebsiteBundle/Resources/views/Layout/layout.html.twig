@@ -19,14 +19,13 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('apple-touch-icon-114x114-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('apple-touch-icon-72x72-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('apple-touch-icon-precomposed.png') }}">
-    <link rel="stylesheet" type="text/css" media="screen" href="http://fonts.googleapis.com/css?family=Raleway:100|Open+Sans:300,300italic,400, 400italic,600,600italic,700&amp;subset=latin,latin-ext" />
-
-    {% include 'Ten24ThriveDesignWebsiteBundle:Layout:_css.html.twig' %}
-    {% include 'Ten24ThriveDesignWebsiteBundle:Layout:_js_header.html.twig' %}
+    
+    {% include 'Ten24GenericCMSWebsiteBundle:Layout:_css.html.twig' %}
+    {% include 'Ten24GenericCMSWebsiteBundle:Layout:_js_header.html.twig' %}
 </head>
 <body {% block extra_body_attributes %}{% endblock %}>
 
-{% include 'Ten24ThriveDesignWebsiteBundle:Layout:_googletagmanager.html.twig' %}
+{% include 'Ten24GenericCMSWebsiteBundle:Layout:_googletagmanager.html.twig' %}
 
 {% block header %}
 
@@ -46,35 +45,6 @@
     <![endif]-->
 
     <header>
-        <div class="contact container">
-            <div class="row">
-                <div class="col-xs-7 col-sm-9 col-lg-10 col-lg-10">
-                    <div class="contact-details">
-                        <h6><span>Contact</span> Thrive</h6>
-                        <p>P: <a href="tel:13065399956">306.539.9946</a></p>
-                        <p>E: <a href="mailto:alicia@thrivedesign.ca">alicia@thrivedesign.ca</a></p>
-                    </div>
-                </div>
-                
-                <div class="col-xs-5 col-sm-3 col-md-2 col-lg-2">
-                    <div class="social">
-                        <a href="http://www.facebook.com/pages/Regina-SK/Thrive-Landscape-Design/136316818545" class="fb" target="_blank">
-                            <span>Thrive Design on Facebook</span>
-                            <i></i>
-                        </a>
-                        <a href="http://twitter.com/aliciathrive" class="tw" target="_blank">
-                            <span>Thrive Design on Twitter</span>
-                            <i></i>
-                        </a>
-                        <a href="https://www.youtube.com/user/Thrivedesign1" class="yt" target="_blank">
-                            <span>Thrive Design on YouTube</span>
-                            <i></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="row">
@@ -95,7 +65,7 @@
                                 {% set homepagePageNode = nodemenu.getNodeByInternalName('homepage') %}
                                 <a href="{{ path('_slug', { 'url': homepagePageNode.slug }) }}">
                                 {% endif %}
-                                    <img alt="Fadadance" src="{{ asset('bundles/ten24thrivedesignwebsite/img/thrive-logo.png') }}" />
+                                    <img alt="{{ websitetitle }}" src="http://placehold.it/400x400" />
                                 {% if nodemenu is defined %}
                                 </a>
                             </h1>
@@ -108,7 +78,7 @@
                         <div class="collapse navbar-collapse" id="main-navigation">
                             <ul class="nav navbar-nav">
                                 {% set activeSubnode = nodemenu.getActiveForDepth(1) %}
-                                {% include 'Ten24ThriveDesignWebsiteBundle:Layout:submenu.html.twig' with { items: activeSubnode.children } %} 
+                                {% include 'Ten24GenericCMSWebsiteBundle:Layout:submenu.html.twig' with { items: activeSubnode.children } %} 
                             </ul>
                         </div>        
                     </div>
@@ -121,30 +91,16 @@
 
 <main role="main">
     <div class="container">
-        <div class="inner">
-            <div class="content">
-                {% block content %}{% endblock %}
-            </div>
-        </div>
+        {% block content %}{% endblock %}
     </div>
 </main>
-
-{% if block('content_footer') %}
-<section class="content-footer">
-    <div class="container">
-        <div class="row">
-            {% block content_footer %}{% endblock %}
-        </div>
-    </div>
-</section>
-{% endif %}
 
 {% block footer %}
     <footer role="footer" class="footer">
         <div class="container">
             <div class="row">
                 <div class="attribution col-xs-12">
-                    <p>&copy {{ "now"|date('Y') }} Thrive Landscape Design</p>
+                    <p>&copy {{ "now"|date('Y') }} {{ websitetitle }}</p>
                     <p>Site by <a href="http://my-studio.ca" target="_blank" title="My Studio">My Studio</a> &amp; <a href="http://tentwentyfour.ca" target="_blank">TenTwentyFour</a></p>
                 </div>
             </div>
@@ -152,7 +108,7 @@
     </footer>
 {% endblock %}
 
-{% include 'Ten24ThriveDesignWebsiteBundle:Layout:_js_footer.html.twig' %}
+{% include 'Ten24GenericCMSWebsiteBundle:Layout:_js_footer.html.twig' %}
 
 </body>
 </html>

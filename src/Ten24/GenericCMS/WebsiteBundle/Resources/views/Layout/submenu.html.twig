@@ -18,7 +18,7 @@
             </a>
             {% if node.children|length>0 %}
                 <ul {% if (startLevel == 1 and node.node.level >= 1) or node.node.level >= 2 %}class="dropdown-menu"{% endif %}>
-                    {% include 'Ten24ThriveDesignWebsiteBundle:Layout:submenu.html.twig' with { items: node.children } %}
+                    {% include 'Ten24GenericCMSWebsiteBundle:Layout:submenu.html.twig' with { items: node.children } %}
                 </ul>
             {% endif %}
         </li>
