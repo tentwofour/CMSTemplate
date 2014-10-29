@@ -14,6 +14,33 @@ parameters:
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+# Assetic Windows/*nix portability
+    assetic.node.bin:
+        # Windows   - Something like "C:/Program Files/nodejs/node"
+        # *nix      - ~ since node should be on your path
+
+    assetic.ruby.bin:
+        # Windows   - Something like "C:/ruby193/bin/ruby"
+        # *nix      - ~ since ruby should be on your path
+
+    assetic.filter.sass.bin:
+        # Windows   - Something like "C:/ruby193/bin/sass" - not the .bat file
+        # *nix      - ~ since sass/scss should be on your path
+
+    assetic.filter.uglifycss.bin:
+        # Because we've installed it in the project with npm/package.json
+        # Both Windows and *nix can point to the same file
+        # Installing per project removes the need to install it globally on each server
+        # Windows   - %kernel.root_dir%/Resources/node_modules/uglifycss/bin/uglifycss
+        # *nix      - %kernel.root_dir%/Resources/node_modules/uglifycss/bin/uglifycss
+
+    assetic.filter.uglifyjs2.bin:
+        # Because we've installed it in the project with npm/package.json
+        # Both Windows and *nix can point to the same file
+        # Installing per project removes the need to install it globally on each server
+        # Windows   - %kernel.root_dir%/Resources/node_modules/uglify-js/bin/uglifyjs
+        # *nix      - %kernel.root_dir%/Resources/node_modules/uglify-js/bin/uglifyjs
+
 # Kunstmaan
     requiredlocales: en
     defaultlocale: en
