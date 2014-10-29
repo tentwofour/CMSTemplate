@@ -48,7 +48,7 @@
     },
     "suggest": {
         "tentwofour/cms-pages-bundle": "dev-master"
-    }
+    },
     "scripts": {
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
