@@ -1,7 +1,8 @@
 {
-    "name": "ten24/cms-template",
-    "license": "proprietary",
-    "type": "project",
+    "name": "tentwofour/cms-template",
+    "keywords": ["kunstmaan", "cms", "admin", "ten24", "tentwofour"]
+    "license": "MIT",
+    "type": "symfony-bundle",
     "description": "A startup project to quickly initialize an instance of Kunstmaan Bundles Standard Edition + other packages required for front/backend development",
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/"}
@@ -32,7 +33,7 @@
 
         "sp/bower-bundle": "v0.10",
         
-        "ten24/cms-pages-bundle": "dev-master"
+        "tentwofour/cms-pages-bundle": "dev-master"
 
     },
     "require-dev": {
