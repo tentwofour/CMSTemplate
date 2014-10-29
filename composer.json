@@ -31,10 +31,7 @@
         "stof/doctrine-extensions-bundle": "1.1.*@dev",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
 
-        "sp/bower-bundle": "v0.10",
-        
-        "tentwofour/cms-pages-bundle": "dev-master"
-
+        "sp/bower-bundle": "v0.10"
     },
     "require-dev": {
         "behat/behat": "~2.5.0",
@@ -49,6 +46,9 @@
         "sensio/generator-bundle": ">=2.3.0",
         "fzaninotto/faker": "~1.4.0"
     },
+    "suggest": {
+        "tentwofour/cms-pages-bundle": "dev-master"
+    }
     "scripts": {
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
