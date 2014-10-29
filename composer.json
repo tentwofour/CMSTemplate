@@ -1,6 +1,6 @@
 {
     "name": "tentwofour/cms-template",
-    "keywords": ["kunstmaan", "cms", "admin", "ten24", "tentwofour"]
+    "keywords": ["kunstmaan", "cms", "admin", "ten24", "tentwofour"],
     "license": "MIT",
     "type": "symfony-bundle",
     "description": "A startup project to quickly initialize an instance of Kunstmaan Bundles Standard Edition + other packages required for front/backend development",
