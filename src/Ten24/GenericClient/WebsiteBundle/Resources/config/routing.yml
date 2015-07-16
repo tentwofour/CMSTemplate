@@ -1,0 +1,4 @@
+ten24genericclientwebsitebundle_default:
+    resource: "@Ten24GenericClientWebsiteBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /

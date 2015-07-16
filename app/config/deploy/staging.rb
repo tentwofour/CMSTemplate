@@ -1,15 +1,17 @@
 set :parameters_file, "parameters_staging.yml"
 
-server '', :app, :web, :primary => true
+set :domain,        ""
+
+server              domain, :app, :web, :primary => true
 
 # user needs access to git repo
 set :user,          ""
 set :deploy_to,     ""
 set :branch,		"develop"
 
-role :app, ""
-role :web, "", :primary => true
-role :db, "", :primary => true
+role :web,          domain
+role :app,          domain, :primary => true
+role :db,           domain, :primary => true
 
 # Webserver user and permissions, writeable dirs is set in main deploy.rb script
 set :webserver_user,        "apache"

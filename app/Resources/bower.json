@@ -1,11 +1,12 @@
 {
-    "name": "Ten24GenericCmsWebsiteBundle",
-    "version": "1.0.0",
-    "dependencies": {
-        "bootstrap-sass-official": "3.2.*",
-        "jquery": "~1.11",
-        "html5shiv": "~3.7",
-        "svgeezy": "~1.0",
-        "components-font-awesome": "4.2.0"
-    }
+  "name": "Ten24GenericClientWebsiteBundle",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap-sass-official": "3.2.*",
+    "components-font-awesome": "4.2.0",
+    "html5shiv": "~3.7",
+    "jquery": "~1.11",
+    "jquery-ui": "~1.10",
+    "svgeezy": "~1.0"
+  }
 }

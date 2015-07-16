@@ -1,32 +1,70 @@
-/web/bundles/
-/app/bootstrap.php.cache
+# Dev only
+web/.htaccess
+
+# Cache and logs (Symfony2)
 /app/cache/*
-/app/config/parameters.yml
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
-/app/Resources/node_modules/*
-!app/Resources/node_modules/.gitkeep
-/vendor/
+
+# Parameters
+/app/config/parameters.yml
+
+# Managed by Composer
+/app/bootstrap.php.cache
+/var/bootstrap.php.cache
 /bin/*
-!bin/fullreload
-!bin/travis_*
-/composer.phar
-.idea
-web/generated-js
-web/generated-css
-web/uploads/*
-!web/uploads/.gitkeep
-/backups
-/web/frontend/.temp
-/web/frontend/*.css
-/web/frontend/*.js
-.DS_Store
-.buildpath
-.project
-.settings/
-*.sublime-project
-*.sublime-workspace
-web/vendor/
-.sass-cache/
+!bin/console
+!bin/symfony_requirements
+/vendor/
+
+# Assets and user uploads
+/web/bundles/
+/web/uploads/*
+!/web/uploads/.gitkeep
+/web/uploads/media/*
+!/web/uploads/media/.htaccess
+/web/formsubmissions/*
+!/web/formsubmissions/.gitkeep
 web/css
+web/Kunstmaan*
+
+# Composer PHAR
+/composer.phar
+
+# Managed by bower/node
+/web/vendor
+/app/Resources/node_modules/*
+!/app/Resources/node_modules/.gitkeep
+/app/Resources/.sass-cache
+
+# Managed by capifony
+/backups
+
+# Grunt build files
+src/Ten24/ReginaFolkFestival/WebsiteBundle/Resources/build/.temp/*
+
+# IDE
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+
+*.iml
+
+## Directory-based project format:
+# .idea/
+# if you remove the above rule, at least ignore the following:
+
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+
+# Sensitive or high-churn files:
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+
+## File-based project format:
+*.ipr
+*.iws

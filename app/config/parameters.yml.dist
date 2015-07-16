@@ -2,44 +2,70 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     symfony
+    database_name:
     database_user:     root
     database_password: ~
+    # Issue with doctrine dbal 2.4.x - looks for connection too soon
+    # This is a temporary fix
+    database_server_version: 5.6
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
     mailer_user:       ~
     mailer_password:   ~
+    mailer_port:       ~
+    mailer_encryption: ~
+
+    # Because some public forms have uploaded files, obtustificate the upload dir for them
+    # As well, turn off PHP engine in that directory
+    form_submission_rootdir: '%kernel.root_dir%/../web/formsubmissions/'
+    form_submission_webdir: '/formsubmissions/'
 
     locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            ChangeMe
+
+    debug_toolbar:              true
+    debug_redirects:            false
+    use_assetic_controller:     true
+
+    session_prefix: ChangeMe
+
+    # May be required (ie. wkhtmltopdf)
+    templating.assets_base_url: ChangeMe
 
 # Assetic Windows/*nix portability
-    assetic.node.bin:
+    assetic.node.bin: /usr/local/bin/node
         # Windows   - Something like "C:/Program Files/nodejs/node"
         # *nix      - ~ since node should be on your path
 
-    assetic.ruby.bin:
+    assetic.ruby.bin: /usr/local/bin/ruby
         # Windows   - Something like "C:/ruby193/bin/ruby"
         # *nix      - ~ since ruby should be on your path
 
-    assetic.filter.sass.bin:
-        # Windows   - Something like "C:/ruby193/bin/sass" - not the .bat file
+    assetic.filter.scss.sass: /usr/local/bin/sass
+        # Windows   - Something like "C:/Ruby193/bin/sass" - not the .bat file
         # *nix      - ~ since sass/scss should be on your path
 
-    assetic.filter.uglifycss.bin:
+    assetic.filter.scss.bin: /usr/local/bin/scss
+        # Windows   - Something like "C:/Ruby193/bin/scss" - not the .bat file
+        # *nix      - ~ since sass/scss should be on your path
+
+    assetic.filter.uglifycss.bin: %kernel.root_dir%/Resources/node_modules/uglifycss/bin/uglifycss
         # Because we've installed it in the project with npm/package.json
         # Both Windows and *nix can point to the same file
         # Installing per project removes the need to install it globally on each server
         # Windows   - %kernel.root_dir%/Resources/node_modules/uglifycss/bin/uglifycss
         # *nix      - %kernel.root_dir%/Resources/node_modules/uglifycss/bin/uglifycss
 
-    assetic.filter.uglifyjs2.bin:
+    assetic.filter.uglifyjs2.bin: %kernel.root_dir%/Resources/node_modules/uglify-js/bin/uglifyjs
         # Because we've installed it in the project with npm/package.json
         # Both Windows and *nix can point to the same file
         # Installing per project removes the need to install it globally on each server
         # Windows   - %kernel.root_dir%/Resources/node_modules/uglify-js/bin/uglifyjs
         # *nix      - %kernel.root_dir%/Resources/node_modules/uglify-js/bin/uglifyjs
+
+    # Bower binary path
+    sp_bower.bower.bin: '%kernel.root_dir%/Resources/node_modules/.bin/bower'
 
 # Kunstmaan
     requiredlocales: en
@@ -47,14 +73,13 @@ parameters:
     multilanguage: false
     sentry.dsn:
     cdnpath:
-    websitetitle: 'GenericCMSWebsite'
+    websitetitle: 'ChangeMe'
     searchport: 9200
-    searchindexname: genericcmswebsite
-    searchindexprefix: genericcmswebsite
+    searchindexname: ChangeMe
+    searchindexprefix: ChangeMe
     analytics.googletagmanager: 
     analytics.google:
     aviary_api_key:
     google.api.client_id:
     google.api.client_secret:
     google.api.dev_key:
-    

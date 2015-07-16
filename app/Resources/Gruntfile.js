@@ -1,49 +1,54 @@
 module.exports = function (grunt) {
     "use strict";
 
-    var Ten24GenericCmsWebsiteBundle;
+    var Builder;
 
     var projectRoot = '../../',
-        resourcesPath = projectRoot+'src/Ten24/**/Resources/';
+        destPath = projectRoot + 'src/Ten24/GenericClient/WebsiteBundle/Resources/public/',
+        srcPath = projectRoot + 'src/Ten24/GenericClient/WebsiteBundle/Resources/build/',
+        vendorPath = projectRoot + 'web/vendor/';
 
-    Ten24GenericCmsWebsiteBundle = {
-        'destination':  projectRoot+'web/frontend/',
-        'js':           [resourcesPath+'public/**/*.js', '!'+ resourcesPath+'public/vendor/**/*.js', 'Gruntfile.js'],
-        'all_scss':     [resourcesPath+'public/scss/**/*.scss'],
-        'scss':         [resourcesPath+'public/scss/style.scss'],
-        'twig':         [resourcesPath+'views/**/*.html.twig'],
-        'img':          [resourcesPath+'public/img/**/*.{png,jpg,jpeg,gif,webp}'],
-        'svg':          [resourcesPath+'public/img/**/*.svg']
+    Builder = {
+        'destination': destPath,
+        'js': [srcPath + 'js/**/*.js', 'Gruntfile.js'],
+        'all_scss': [srcPath + 'scss/**/*.scss'],
+        'scss': [srcPath + 'scss/style.scss'],
+        'twig': [srcPath + 'views/**/*.html.twig'],
+        'img': [srcPath + 'img/**/*.{png,jpg,jpeg,gif,webp}'],
+        'svg': [srcPath + 'img/**/*.svg']
     };
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
         watch: {
-            Ten24GenericCmsWebsiteBundleScss: {
-                files: Ten24GenericCmsWebsiteBundle.all_scss,
+            BuilderScss: {
+                files: Builder.all_scss,
                 tasks: ['sass', 'cmq', 'cssmin']
             },
-            Ten24GenericCmsWebsiteBundleJs: {
-                files: Ten24GenericCmsWebsiteBundle.js,
+            BuilderJs: {
+                files: Builder.js,
                 tasks: ['uglify', 'concat']
             },
-            Ten24GenericCmsWebsiteBundleImages: {
-                files: Ten24GenericCmsWebsiteBundle.img,
-                tasks: ['imagemin:Ten24GenericCmsWebsiteBundle'],
+            BuilderImages: {
+                files: Builder.img,
+                tasks: ['imagemin:Builder'],
                 options: {
                     event: ['added', 'changed']
                 }
             },
-            Ten24GenericCmsWebsiteBundleSvg: {
-                files: Ten24GenericCmsWebsiteBundle.svg,
-                tasks: ['svg2png:Ten24GenericCmsWebsiteBundle', 'svgmin'],
+            BuilderSvg: {
+                files: Builder.svg,
+                tasks: ['svg2png:Builder', 'svgmin'],
                 options: {
                     event: ['added', 'changed']
                 }
             },
             livereload: {
-                files: ['../../web/frontend/css/style.min.css', '../../web/frontend/js/footer.min.js'],
+                files: [
+                    Builder.destination + 'css/style.min.css',
+                    Builder.destination + 'js/footer.min.js'
+                ],
                 options: {
                     livereload: true
                 }
@@ -51,33 +56,45 @@ module.exports = function (grunt) {
         },
 
         sass: {
-            Ten24GenericCmsWebsiteBundle: {
+            Builder: {
                 options: {
-                    style: 'compressed'
+                    style: 'compressed',
+                    cacheLocation: '../../app/cache/.sass-cache/'
                 },
                 files: {
-                    '../../web/frontend/.temp/css/style.css': resourcesPath+'public/scss/style.scss',
+                    '../../src/Ten24/GenericClient/WebsiteBundle/Resources/build/.temp/css/style.css': srcPath + 'scss/style.scss'
                 }
             }
         },
 
         cmq: {
-            Ten24GenericCmsWebsiteBundle: {
+            Builder: {
+                options: {
+                    log: true
+                },
                 files: {
-                    '../../web/frontend/.temp/css/': '../../web/frontend/.temp/css/style.css'
+                    // Combine
+                    '../../src/Ten24/GenericClient/WebsiteBundle/Resources/build/.temp/css/': [
+                        '../../src/Ten24/GenericClient/WebsiteBundle/Resources/build/.temp/css/style.css'
+                    ]
                 }
             }
         },
 
         cssmin: {
-            Ten24GenericCmsWebsiteBundle: {
+            Builder: {
                 // Used to rewrite URLs in (particular) fancybox
                 options: {
+                    // This is where bower vendors are installed to (web/vendor)
                     root: '../../web'
                 },
+                // Can't use srcPath+'build/.temp/css/style.css here for some reason?
                 files: {
-                    '../../web/frontend/css/style.min.css': [
-                        Ten24GenericCmsWebsiteBundle.destination+'.temp/css/style.css'
+                    '../../src/Ten24/GenericClient/WebsiteBundle/Resources/public/css/style.min.css': [
+                        vendorPath + 'mediaelement/build/mediaelementplayer.css',
+                        vendorPath + 'mediaelement/build/mejs-skins.css',
+                        vendorPath + 'fancybox/source/jquery.fancybox.css',
+                        '../../src/Ten24/GenericClient/WebsiteBundle/Resources/build/.temp/css/style.css'
                     ]
                 }
             }
@@ -101,9 +118,9 @@ module.exports = function (grunt) {
                     $: true
                 }
             },
-            Ten24GenericCmsWebsiteBundle: {
+            Builder: {
                 files: {
-                    src: Ten24GenericCmsWebsiteBundle.js
+                    src: Builder.js
                 }
             }
         },
@@ -111,8 +128,8 @@ module.exports = function (grunt) {
         uglify: {
             analytics: {
                 files: {
-                    '../../web/frontend/js/analytics.min.js': [
-                        projectRoot+'vendor/kunstmaan/seo-bundle/Kunstmaan/SeoBundle/Resources/public/js/analytics.js'
+                    '../../src/Ten24/GenericClient/WebsiteBundle/Resources/public/js/analytics.min.js': [
+                        projectRoot + 'vendor/kunstmaan/bundles-cms/src/Kunstmaan/SeoBundle/Resources/public/js/analytics.js'
                     ]
                 }
             },
@@ -123,16 +140,17 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    '../../web/frontend/.temp/js/vendors.min.js': [
-                        projectRoot+'web/vendor/jquery/dist/jquery.js',
-                        projectRoot+'web/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js',
-                        projectRoot+'web/vendor/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js'
+                    '../../src/Ten24/GenericClient/WebsiteBundle/Resources/build/.temp/js/vendors.min.js': [
+                        vendorPath + 'jquery/dist/jquery.js',
+                        vendorPath + 'bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js',
+                        vendorPath + 'bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
+                        vendorPath + 'bootstrap-sass-official/assets/javascripts/bootstrap/transition.js'
                     ]
                 }
             },
-            Ten24GenericCmsWebsiteBundle: {
+            Builder: {
                 files: {
-                    '../../web/frontend/.temp/js/app.min.js': [resourcesPath+'public/js/**/*.js']
+                    '../../src/Ten24/GenericClient/WebsiteBundle/Resources/build/.temp/js/app.min.js': [srcPath + 'js/**/*.js']
                 }
             }
         },
@@ -140,39 +158,39 @@ module.exports = function (grunt) {
         concat: {
             js: {
                 src: [
-                    Ten24GenericCmsWebsiteBundle.destination+'js/modernizr-custom.js',
-                    Ten24GenericCmsWebsiteBundle.destination+'.temp/js/vendors.min.js',
-                    Ten24GenericCmsWebsiteBundle.destination+'.temp/js/app.min.js'
+                    srcPath + '.temp/js/modernizr-custom.js',
+                    srcPath + '.temp/js/vendors.min.js',
+                    srcPath + '.temp/js/app.min.js'
                 ],
-                dest: Ten24GenericCmsWebsiteBundle.destination+'/js/footer.min.js'
+                dest: destPath + 'js/footer.min.js'
             }
         },
 
         imagemin: {
-            Ten24GenericCmsWebsiteBundle: {
+            Builder: {
                 options: {
                     optimizationLevel: 3,
                     progressive: true
                 },
                 files: [{
                     expand: true,
-                    cwd: resourcesPath+'public/img',
+                    cwd: '../../src/Ten24/GenericClient/WebsiteBundle/Resources/build/img/',
                     src: '**/*.{png,jpg,jpeg,gif,webp}',
-                    dest: resourcesPath+'public/img'
+                    dest: '../../src/Ten24/GenericClient/WebsiteBundle/Resources/public/img/'
                 }]
             }
         },
 
         svg2png: {
-            Ten24GenericCmsWebsiteBundle: {
+            Builder: {
                 files: [{
-                    src: Ten24GenericCmsWebsiteBundle.svg
+                    src: Builder.svg
                 }]
             }
         },
 
         svgmin: {
-            Ten24GenericCmsWebsiteBundle: {
+            Builder: {
                 options: {
                     plugins: [{
                         removeViewBox: false
@@ -180,42 +198,42 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: resourcesPath+'public/img',
+                    cwd: srcPath + 'img',
                     src: '**/*.svg',
-                    dest: resourcesPath+'public/img'
+                    dest: destPath + 'img'
                 }]
             }
         },
 
         modernizr: {
-            Ten24GenericCmsWebsiteBundle: {
+            Builder: {
                 devFile: 'remote',
                 parseFiles: true,
                 files: {
                     src: [
-                        Ten24GenericCmsWebsiteBundle.js,
-                        Ten24GenericCmsWebsiteBundle.all_scss,
-                        Ten24GenericCmsWebsiteBundle.twig
+                        Builder.js,
+                        Builder.all_scss,
+                        Builder.twig
                     ]
                 },
-                outputFile: Ten24GenericCmsWebsiteBundle.destination + 'js/modernizr-custom.js',
+                outputFile: srcPath + '.temp/js/modernizr-custom.js',
 
                 extra: {
-                    'shiv' : false,
-                    'printshiv' : false,
-                    'load' : true,
-                    'mq' : false,
-                    'cssclasses' : true
+                    'shiv': false,
+                    'printshiv': false,
+                    'load': true,
+                    'mq': false,
+                    'cssclasses': true
                 },
                 extensibility: {
-                    'addtest' : false,
-                    'prefixed' : false,
-                    'teststyles' : false,
-                    'testprops' : false,
-                    'testallprops' : false,
-                    'hasevents' : false,
-                    'prefixes' : false,
-                    'domprefixes' : false
+                    'addtest': false,
+                    'prefixed': false,
+                    'teststyles': false,
+                    'testprops': false,
+                    'testallprops': false,
+                    'hasevents': false,
+                    'prefixes': false,
+                    'domprefixes': false
                 }
             }
         }

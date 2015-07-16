@@ -1,0 +1,50 @@
+<header>
+    <nav role="navigation">
+        <div>
+            <div>
+                <div>
+                    <div>
+                        {% if nodemenu is defined %}
+                        <button type="button" data-toggle="collapse" data-target="#main-navigation">
+                                <span>
+                                    <span class="icon">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </span>
+                                </span>
+                        </button>
+                        {% endif %}
+
+                        {%
+                        set homepagePath =
+                            (nodemenu is defined and nodemenu.getNodeByInternalName('homepage') is not empty)
+                            ? path('_slug', { 'url': homepagePageNode.slug })
+                            : '/'
+                        %}
+
+                        <a href="{{ homepagePath }}">
+                            Brand
+                        </a>
+                    </div>
+                </div>
+
+
+                    <div>
+                        <div class="collapse" id="main-navigation">
+                            <ul>
+                                {% if nodemenu is defined %}
+                                    {% set activeSubnode = nodemenu.getActiveForDepth(1) %}
+                                    {% include 'Ten24GenericClientWebsiteBundle:Layout:submenu.html.twig' with { items: activeSubnode.children } %}
+                                {% else %}
+                                    <li class="active">
+                                        <a href="/">Home</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -1,87 +1,80 @@
 {
-    "name": "tentwofour/cms-template",
-    "keywords": ["kunstmaan", "cms", "admin", "ten24", "tentwofour"],
-    "license": "MIT",
-    "type": "symfony-bundle",
-    "description": "A startup project to quickly initialize an instance of Kunstmaan Bundles Standard Edition + other packages required for front/backend development",
-    "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/"}
-    },
-    "require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "~2.3",
-        "doctrine/orm": "~2.2,>=2.2.3",
-        "doctrine/doctrine-bundle": "~1.2",
-        "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.3",
-        "sensio/distribution-bundle": ">=2.3.0",
-        "sensio/framework-extra-bundle": ">=2.3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
-
-        "kunstmaan/bundles-cms": "3.0.*@dev",
-
-        "raven/raven": "~0.8",
-        "liip/cache-control-bundle": "~1.0.7",
-        "ekino/newrelic-bundle": "~1.2.2",
-        "jms/security-extra-bundle": "~1.5.1",
-        "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
-        "doctrine/migrations": "~1.0@dev",
-        "stof/doctrine-extensions-bundle": "1.1.*@dev",
-        "friendsofsymfony/user-bundle": "2.0.*@dev",
-        "friendsofsymfony/http-cache-bundle": "~1.0",
-        "sp/bower-bundle": "v0.10"
-    },
-    "require-dev": {
-        "behat/behat": "~2.5.0",
-        "behat/mink": "*",
-        "behat/symfony2-extension": "*",
-        "behat/mink-extension": "*",
-        "behat/mink-browserkit-driver": "*",
-        "behat/mink-selenium2-driver": "*",
-        "behat/mink-goutte-driver": "*",
-        "behat/mink-sahi-driver": "*",
-        "phpunit/phpunit": "~3.7",
-        "sensio/generator-bundle": ">=2.3.0",
-        "fzaninotto/faker": "~1.4.0"
-    },
-    "suggest": {
-        "tentwofour/cms-pages-bundle": "dev-master"
-    },
-    "scripts": {
-        "post-root-package-install": [
-            "SymfonyStandard\\Composer::hookRootPackageInstall"
-        ],
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sp\\BowerBundle\\Composer\\ScriptHandler::bowerInstall"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sp\\BowerBundle\\Composer\\ScriptHandler::bowerInstall"
-        ]
-    },
-    "config": {
-        "bin-dir": "bin"
-    },
-    "minimum-stability": "stable",
-    "extra": {
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "web",   
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
+  "name": "tentwofour/cms-template",
+  "keywords": [
+    "kunstmaan",
+    "cms",
+    "admin",
+    "ten24",
+    "tentwofour"
+  ],
+  "license": "MIT",
+  "type": "symfony-bundle",
+  "description": "A startup project to quickly initialize an instance of Kunstmaan Bundles Standard Edition + other packages required for front/backend development",
+  "autoload": {
+    "psr-0": {
+      "": "src/",
+      "SymfonyStandard": "app/"
     }
+  },
+  "require": {
+    "php": ">=5.3.3",
+    "kunstmaan/bundles-cms": "3.2.0",
+    "friendsofsymfony/http-cache-bundle": "~1.0",
+    "friendsofsymfony/user-bundle": "2.0.*@dev",
+    "jms/security-extra-bundle": "~1.5.1",
+    "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
+    "doctrine/migrations": "~1.0@dev",
+    "sp/bower-bundle": "v0.10"
+  },
+  "require-dev": {
+    "behat/behat": "~2.5.0",
+    "behat/mink": "*",
+    "behat/symfony2-extension": "*",
+    "behat/mink-extension": "*",
+    "behat/mink-browserkit-driver": "*",
+    "behat/mink-selenium2-driver": "*",
+    "behat/mink-goutte-driver": "*",
+    "behat/mink-sahi-driver": "*",
+    "phpunit/phpunit": "~3.7",
+    "sensio/generator-bundle": ">=2.3.0",
+    "fzaninotto/faker": "~1.4.0"
+  },
+  "suggest": {
+    "tentwofour/cms-pages-bundle": "dev-master",
+    "tentwofour/formatter": "1.0.0",
+    "tentwofour/sf2-form": "1.0.0"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+      "Sp\\BowerBundle\\Composer\\ScriptHandler::bowerInstall"
+    ],
+    "post-update-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+      "Sp\\BowerBundle\\Composer\\ScriptHandler::bowerInstall"
+    ]
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "minimum-stability": "stable",
+  "extra": {
+    "symfony-app-dir": "app",
+    "symfony-web-dir": "web",
+    "symfony-assets-install": "symlink",
+    "incenteev-parameters": {
+      "file": "app/config/parameters.yml"
+    },
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
 }

@@ -1,0 +1,23 @@
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+footer {
+  background: $gray-dark;
+  color: $gray-lighter;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  > div {
+    @extend .container;
+
+    > div {
+      @extend .row;
+
+      > div {
+        @extend .col-xs-12;
+        font-size: $font-size-base - 2;
+      }
+    }
+  }
+}

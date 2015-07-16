@@ -26,13 +26,10 @@ class AppKernel extends Kernel
                 new JMS\AopBundle\JMSAopBundle(),
                 
                 new Liip\ImagineBundle\LiipImagineBundle(),
-                new Liip\CacheControlBundle\LiipCacheControlBundle(),
-                
                 new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
                 new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-                
                 new FOS\UserBundle\FOSUserBundle(),
-                
+                new \FOS\HttpCacheBundle\FOSHttpCacheBundle(),
                 new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
                 
                 new Kunstmaan\AdminBundle\KunstmaanAdminBundle(),
@@ -40,6 +37,7 @@ class AppKernel extends Kernel
                 new Kunstmaan\MediaPagePartBundle\KunstmaanMediaPagePartBundle(),
                 new Kunstmaan\MediaBundle\KunstmaanMediaBundle(),
                 new Kunstmaan\AdminListBundle\KunstmaanAdminListBundle(),
+                new Kunstmaan\FormBundle\KunstmaanFormBundle(),
                 new Kunstmaan\SearchBundle\KunstmaanSearchBundle(),
                 new Kunstmaan\NodeSearchBundle\KunstmaanNodeSearchBundle(),
                 new Kunstmaan\SitemapBundle\KunstmaanSitemapBundle(),
@@ -56,7 +54,7 @@ class AppKernel extends Kernel
             
                 new Sp\BowerBundle\SpBowerBundle(),
                 
-                new Ten24\GenericCMS\WebsiteBundle\Ten24GenericCMSWebsiteBundle()
+                new Ten24\GenericClient\WebsiteBundle\Ten24GenericClientWebsiteBundle()
                 
         );
         

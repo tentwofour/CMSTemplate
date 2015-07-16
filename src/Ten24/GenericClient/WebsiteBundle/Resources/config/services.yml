@@ -1,0 +1,9 @@
+parameters:
+
+services:
+    ten24_gcwb.admin_menu_adaptor:
+        class: Ten24\GenericClient\WebsiteBundle\Menu\AdminMenuAdaptor
+        arguments:
+            - @security.context
+        tags:
+            -  { name: 'kunstmaan_admin.menu.adaptor' }

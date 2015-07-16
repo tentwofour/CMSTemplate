@@ -1,64 +1,29 @@
+# config.yml
+# This application's bundle configuration(s)
+
 imports:
-    - { resource: parameters.yml }
-    - { resource: security.yml }
+    - { resource: config_base.yml }
 
-framework:
-    esi:             { enabled: true }
-    translator:      { fallback: "%locale%" }
-    secret:          "%secret%"
-    router:
-        resource: "%kernel.root_dir%/config/routing.yml"
-        strict_requirements: ~
-    form:            ~
-    csrf_protection: ~
-    validation:      { enable_annotations: true }
-    templating:
-        engines: ['twig']
-        assets_version: 1
-    default_locale:  "%locale%"
-    trusted_proxies: ~
-    session:         ~
-    fragments:       ~
-    http_method_override: true
-
-# Twig Configuration
 twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
     globals:
         websitetitle: %websitetitle%
         defaultlocale: %defaultlocale%
         requiredlocales: %requiredlocales%
-        titlebgcolor: '#000'
+        gtm_code: %analytics.googletagmanager%
+        ga_code: %analytics.google%
+        titlecolor: "#000000"
+        titlebgcolor: "#ffffff"
 
-# This is all configured in parameters.yml for ULTIMATE portability!!!
-assetic:
-    debug: "%kernel.debug%"
-    use_controller: false
-    filters:
-        cssrewrite: ~
-        sass: ~
-        scss: ~
-        uglifyjs2: ~
-        uglifyjs: ~
-        uglifycss: ~
-
-# Doctrine Configuration
 doctrine:
-    dbal:
-        driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
-
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         entity_managers:
             default:
                 auto_mapping: true
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
                 mappings:
                     gedmo_translatable:
                         type: annotation
@@ -84,9 +49,16 @@ doctrine:
                         dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
                         alias: GedmoTree # this one is optional and will default to the name set for the mapping
                         is_bundle: false
+                    gedmo_sortable:
+                        type: annotation
+                        prefix: Gedmo\Sortable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Sortable/Entity"
+                        alias: GedmoSortable # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
 
 parameters:
     assetic.cache.class: Assetic\Cache\ArrayCache
+    session.attribute_bag.class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
 
 stof_doctrine_extensions:
     default_locale: %defaultlocale%
@@ -96,7 +68,10 @@ stof_doctrine_extensions:
             loggable: true
             translatable: true
             sluggable: true
+            sortable: true
             tree: true
+            softdeleteable: true
+
 
 liip_imagine:
     cache_prefix: uploads/cache
@@ -120,7 +95,7 @@ liip_imagine:
             format: png
             filters:
                 strip: ~
-        
+
 services:
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
@@ -146,36 +121,34 @@ services:
         class: Monolog\Formatter\LineFormatter
 
 white_october_pagerfanta:
-    default_view: twitter_bootstrap3
+    default_view: twitter_bootstrap
 
 kunstmaan_translator:
     enabled: false
-    managed_locales: ['en']
+    managed_locales: []
 
 kunstmaan_admin:
     dashboard_route: 'kunstmaan_dashboard'
-                
-# Swiftmailer Configuration
-swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
-    
+    admin_password: 'admin'
+
 sp_bower:
     install_on_warmup: true
     keep_bowerrc: true
-    bin: %kernel.root_dir%/Resources/node_modules/bower/bin/bower
     offline: false
     allow_root: false
     assetic:
         enabled: false
     bundles:
-        Ten24GenericCMSWebsiteBundle:
+        Ten24GenericClientWebsiteBundle:
             config_dir: %kernel.root_dir%/Resources
             asset_dir: %kernel.root_dir%/../web/vendor
             json_file: component.json
             cache:
                 id: ~
                 directory: %kernel.cache_dir%/bower
+
+white_october_pagerfanta:
+    default_view: twitter_bootstrap3
+    exceptions_strategy:
+        out_of_range_page:        to_http_not_found
+        not_valid_current_page:   to_http_not_found

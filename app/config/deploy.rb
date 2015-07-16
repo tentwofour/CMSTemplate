@@ -15,7 +15,6 @@ set  :keep_releases,        3
 # No touchy past here
 ###
 
-
 set :stage_dir,             "app/config/deploy"
 
 # Multistage setup
@@ -57,7 +56,7 @@ set :update_assets_version, true
 set :assets_install,        true
 
 # Writable directories, webserver user and other details in deploy/{env}.rb files
-set :writable_dirs,         ["app/cache", "app/logs", "web/vendor/cache", "web/uploads"]
+set :writable_dirs,         ["app/cache", "app/logs", "web/uploads"]
 
 # No sudo
 set :use_sudo,              false
@@ -134,12 +133,6 @@ after "deploy:setup", "upload_parameters"
 # Install node modules before composer update, as spbowerbundle relies on bower being installed
 # and is run as a composer install/update script 
 before 'symfony:composer:install', 'composer:npm_install', 'deploy:refresh_node_modules_symlink'
-
-# Admin area requires assetic:dump
-#after 'deploy:restart', 'symfony:assetic:dump'
-
-# Ensure proper permissions, and update the assets version 
-before "deploy:restart", "deploy:set_permissions"
 
 # Be more verbose by uncommenting the following line
 logger.level = Logger::MAX_LEVEL

@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Main/Content
+   ========================================================================== */
+   
+main {
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  > div {
+    @extend .container;
+  }
+
+  .page-content {
+    @extend .row;
+
+    > div {
+      @extend .col-sm-8;
+
+      &.sidebar {
+        @extend .col-sm-4;
+      }
+    }
+  }
+}

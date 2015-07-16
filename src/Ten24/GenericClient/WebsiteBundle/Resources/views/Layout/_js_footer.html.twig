@@ -1,0 +1,6 @@
+<script src="{{ asset('/bundles/ten24genericclientwebsite/js/footer.min.js') }}"></script>
+
+{% if ga_code is defined %}
+    <script src="{{ asset('/bundles/ten24genericclientwebsite/js/analytics.min.js') }}"></script>
+    {{ google_analytics_initialize({'account_id': ga_code}) }}
+{% endif %}
